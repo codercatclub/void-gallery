@@ -1,19 +1,28 @@
-import AFRAME from 'aframe';
+import AFRAME from "aframe";
 const THREE = AFRAME.THREE;
 
 export default {
-  schema: {
-  },
+  schema: {},
 
   init: function () {
-    console.log(document.querySelector('.sections'));
-    document.addEventListener('scroll', (event) => {
+    const menuEls = document.querySelectorAll(".menu ul");
+
+    document.addEventListener("scroll", (event) => {
       event.preventDefault();
-      this.el.object3D.position.z = -0.001*window.scrollY + 1;
+      this.el.object3D.position.z = -0.001 * window.scrollY;
+
+      const section = Math.floor(
+        window.scrollY / window.SECTION_SCROLL_DISTANCE
+      );
+
+      menuEls.forEach((el) => {
+        if (el.getAttribute("id") === `${section}`) {
+          el.classList.add("active");
+        } else {
+          el.classList.remove("active");
+        }
+      });
+
     });
   },
-
-  tick: function (time, timeDelta) {
-    // Do something on every scene tick or frame.
-  },
-}
+};
