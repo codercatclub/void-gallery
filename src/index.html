@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Void Gallery</title>
+  <script src="bundle.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Quicksand:400');
+
+    html {
+      position: absolute !important;
+    }
+
+    body {
+      overflow: auto !important;
+    }
+
+    .section {
+      height: 200vh;
+    }
+
+    .a-enter-vr-button {
+      visibility: hidden;
+    }
+
+    .menu {
+      color: white;
+      font-size: 40px;
+      font-family: 'Quicksand', sans-serif;
+      list-style: none;
+    }
+
+    .menu-container {
+      position: fixed;
+      z-index: 100;
+      display: flex;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      align-items: center;
+    }
+
+    .menu ul {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sections">
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+  </div>
+
+  <div class="menu-container">
+    <li class="menu">
+      <ul id="0">
+        Raven
+      </ul>
+      <ul id="1">
+        Hologram Inside
+      </ul>
+      <ul id="2">
+        Vivid Skin
+      </ul>
+      <ul id="3">
+        Cracked Soul
+      </ul>
+      <ul id="4">
+        Synapsis
+      </ul>
+      <ul id="5">
+        Blizzard
+      </ul>
+      <ul id="6">
+        Click and cry
+      </ul>
+    </li>
+  
+  </div>
+
+  <a-scene renderer="colorManagement: true" background="color: #000000">
+    <a-assets>
+      <img id="img_01" src="assets/textures/img_01.jpg"></img>
+      <img id="img_02" src="assets/textures/img_02.jpg"></img>
+      <img id="img_03" src="assets/textures/img_03.jpg"></img>
+      <img id="img_04" src="assets/textures/img_04.jpg"></img>
+      <img id="img_05" src="assets/textures/img_05.jpg"></img>
+      <img id="img_06" src="assets/textures/img_06.jpg"></img>
+      <img id="img_07" src="assets/textures/img_07.jpg"></img>
+    </a-assets>
+  
+    <a-entity particles />
+
+    <a-entity id="camera" position="0 0 1" camera="active: true" scroll></a-entity>
+
+    <a-plane position="0 0 0" material="shader:flat; src: #img_01"></a-plane>
+    <a-plane position="0 0 -2" material="shader:flat; src: #img_02"></a-plane>
+    <a-plane position="0 0 -4" material="shader:flat; src: #img_03"></a-plane>
+    <a-plane position="0 0 -6" material="shader:flat; src: #img_04"></a-plane>
+    <a-plane position="0 0 -8" material="shader:flat; src: #img_05"></a-plane>
+    <a-plane position="0 0 -10" material="shader:flat; src: #img_06"></a-plane>
+    <a-plane position="0 0 -12" material="shader:flat; src: #img_07"></a-plane>
+
+  </a-scene>
+
+  <script>
+    const handleClick = (event) => {
+      const elID = event.target.getAttribute('id');
+      if (!elID) {
+        return
+      }
+      const section = parseInt(elID);
+
+      const xScrollTarget = section * 2000;
+
+      window.scroll({
+        top: xScrollTarget,
+        behavior: 'smooth',
+      });
+    }
+
+    const menuEls = document.querySelectorAll(".menu ul");
+
+    menuEls.forEach(ul => {
+      ul.addEventListener('click', handleClick);
+    });
+  </script>
+</body>
+
+</html>
