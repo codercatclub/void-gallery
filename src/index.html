@@ -18,7 +18,11 @@
     }
 
     .section {
-      height: 200vh;
+      height: var(--scroll-distance);
+    }
+
+    .footer {
+      height: 200px;
     }
 
     .a-enter-vr-button {
@@ -50,6 +54,12 @@
     .active {
       color: red;
     }
+
+    @media only screen and (max-width: 600px) {
+      .menu {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -61,6 +71,7 @@
     <div class="section"></div>
     <div class="section"></div>
     <div class="section"></div>
+    <div class="footer"></div>
   </div>
 
   <div class="menu-container">
@@ -112,11 +123,14 @@
     <a-plane position="0 0 -10" scale="2 2 2" material="shader:flat; src: #img_05"></a-plane>
     <a-plane position="0 0 -12" scale="2 2 2" material="shader:flat; src: #img_06"></a-plane>
     <a-plane position="0 0 -14" scale="2 2 2" material="shader:flat; src: #img_07"></a-plane>
-
   </a-scene>
 
   <script>
-    window.SECTION_SCROLL_DISTANCE = 2000;
+    window.SCROLL_SPEED = 2;
+    window.SECTION_SCROLL_DISTANCE = 2000 / window.SCROLL_SPEED;
+    
+    document.documentElement.style.setProperty('--scroll-distance', `${window.SECTION_SCROLL_DISTANCE}px`);
+
     const menuEls = document.querySelectorAll('.menu ul');
 
     const handleClick = (event) => {

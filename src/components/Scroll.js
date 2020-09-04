@@ -9,7 +9,7 @@ export default {
 
     document.addEventListener("scroll", (event) => {
       event.preventDefault();
-      this.el.object3D.position.z = -0.001 * window.scrollY;
+      this.el.object3D.position.z = (-0.001 * window.scrollY) * window.SCROLL_SPEED;
 
       const section = Math.floor(
         window.scrollY / window.SECTION_SCROLL_DISTANCE
